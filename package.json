@@ -1,0 +1,17 @@
+{
+  "name": "koa-ng-boilerplate",
+  "version": "0.0.0",
+  "description": "Koa..js and Angular client/server app boilerplate",
+  "main": "bin/koa-ng-boilerplate",
+  "bin": {
+    "koa-ng-boilerplate": "./bin/koa-ng-boilerplate"
+  },
+  "author": [
+    "Ryan Fink <ryanjfink@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "ncp": "0.6.0",
+    "commander": "2.3.0"
+  }
+}

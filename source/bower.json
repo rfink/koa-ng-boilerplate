@@ -1,0 +1,19 @@
+{
+  "name": "{{app}}",
+  "version": "0.0.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "underscore": "1.6.0",
+    "jquery": "1.10.2",
+    "angular": "1.2.21",
+    "angular-resource": "1.2.21",
+    "angular-route": "1.2.21",
+    "angular-ui-bootstrap": "0.10.0",
+    "angular-flare": "0.0.4"
+  }
+}

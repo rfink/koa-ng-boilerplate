@@ -1,0 +1,11 @@
+#!/usr/bin/env node --harmony
+'use strict';
+
+let http = require('http');
+let config = require('../server/config');
+let app = require('..');
+
+http.createServer(app.callback()).listen(config.port, function() {
+  console.log('Listening');
+});
+

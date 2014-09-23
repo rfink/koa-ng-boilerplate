@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html ng-app="{{app}}">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{app}} Title Goes Here</title>
+  </head>
+  <body>
+    <ng-view></ng-view>
+    <!-- @if NODE_ENV == 'PRODUCTION' -->
+    <script src="/assets/{{app}}.min.js"></script>
+    <!-- @endif -->
+    <!-- @if NODE_ENV != 'PRODUCTION' -->
+    <script src="/assets/{{app}}.js"></script>
+    <!-- @endif -->
+  </body>
+</html>

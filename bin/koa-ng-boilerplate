@@ -1,0 +1,64 @@
+#!/usr/bin/env node --harmony
+
+var program = require('commander');
+var ncp = require('ncp').ncp;
+var path = require('path');
+var Transform = require('stream').Transform;
+var pkg = require('../package.json');
+
+program
+  .version(pkg.version)
+  .option('-n, --name <path>', 'Name of the repo/directory to create')
+  .parse(process.argv);
+
+if (!program.name) {
+  console.error('Name cannot be empty');
+  return process.exit(1);
+}
+
+var cwd = process.cwd();
+var source = path.resolve(__dirname + '/../source');
+var dest = cwd + '/' + program.name;
+var opts = {};
+opts.stopOnErr = true;
+opts.transform = transform;
+
+/**
+ * Create a transform stream that does text replacement as needed
+ */
+function createReplacer() {
+  var replacer = new Transform({ decodeStrings: false });
+  replacer._transform = function doReplacement(chunk, encoding, done) {
+    return done(null, chunk.toString().replace(/{{app}}/g, program.name));
+  };
+
+  return replacer;
+}
+
+/**
+ * When we are done, check for errors, then bail
+ */
+function finished(err) {
+  if (err) {
+    console.error(err);
+    return process.exit(1);
+  }
+
+  console.log('Success!');
+  return process.exit(0);
+}
+
+/**
+ * Pipe our read stream to our write stream, after being handled by the
+ *   text replacer
+ */
+function transform(read, write) {
+  return write.on('open', function onOpen() {
+    return read
+      .pipe(createReplacer())
+      .pipe(write);
+  });
+}
+
+ncp.limit = 16;
+ncp(source, dest, opts, finished);

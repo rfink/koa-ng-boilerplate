@@ -1,0 +1,7 @@
+
+# Comment line below if you want to commit your node_modules
+node_modules
+npm-debug.log
+
+# Bower
+bower_components
